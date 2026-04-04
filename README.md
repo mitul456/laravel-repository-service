@@ -3,14 +3,17 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mitul456/laravel-repository-service.svg)](https://packagist.org/packages/mitul456/laravel-repository-service)
 [![Total Downloads](https://img.shields.io/packagist/dt/mitul456/laravel-repository-service.svg)](https://packagist.org/packages/mitul456/laravel-repository-service)
 [![License](https://img.shields.io/packagist/l/mitul456/laravel-repository-service.svg)](https://github.com/mitul456/laravel-repository-service/blob/main/LICENSE)
+[![PHP Version](https://img.shields.io/packagist/php-v/mitul456/laravel-repository-service.svg)](https://packagist.org/packages/mitul456/laravel-repository-service)
 
 A powerful Laravel package to automatically generate **Repository** and **Service** layers, helping you build clean, maintainable, and testable applications.
 
-> 🇧🇩 বাংলা: এটি একটি Laravel প্যাকেজ যা Repository Pattern এবং Service Layer স্বয়ংক্রিয়ভাবে তৈরি করে, আপনার কোডকে আরও ক্লিন এবং মেইন্টেইনেবল করে তোলে।
+> 🇧🇩 বাংলা: এটি একটি Laravel প্যাকেজ যা Repository Pattern এবং Service Layer স্বয়ংক্রিয়ভাবে তৈরি করে, আপনার কোডকে আরও ক্লিন এবং মেইন্টেইনেবল করে তোলে।  
 
 ---
 
 ## ⚡ Quick Start
+
+Install the package via Composer:
 
 ```bash
 composer require mitul456/laravel-repository-service

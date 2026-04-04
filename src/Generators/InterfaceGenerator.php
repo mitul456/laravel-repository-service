@@ -13,20 +13,37 @@ class InterfaceGenerator
 
     public function generate(): void
     {
-        $namespace = config('repository-service.repository_namespace') . '\\Contracts';
-        $path = config('repository-service.repository_path') . '/Contracts';
+        // Config values with defaults
+        $repositoryNamespace = config('repository-service.repository_namespace', 'App\\Repositories');
+        $namespace = $repositoryNamespace . '\\Contracts';
 
-        if (!is_dir($path)) {
-            mkdir($path, 0755, true);
-        }
+        $repositoryPath = config('repository-service.repository_path', app_path('Repositories'));
+        $path = $repositoryPath . DIRECTORY_SEPARATOR . 'Contracts';
+
+        // Ensure directory exists
+        $this->makeDirectory($path);
 
         $interfaceName = $this->name . 'RepositoryInterface';
-        $filePath = $path . '/' . $interfaceName . '.php';
+        $filePath = $path . DIRECTORY_SEPARATOR . $interfaceName . '.php';
 
-        $stub = file_get_contents(base_path('stubs/interface.stub'));
+        $stubPath = base_path('stubs/interface.stub');
+        if (!file_exists($stubPath)) {
+            throw new \Exception("Stub file not found: {$stubPath}");
+        }
+
+        $stub = file_get_contents($stubPath);
         $stub = str_replace('{{ namespace }}', $namespace, $stub);
         $stub = str_replace('{{ class }}', $interfaceName, $stub);
 
         file_put_contents($filePath, $stub);
+    }
+
+    protected function makeDirectory(string $path): void
+    {
+        if (!is_dir($path)) {
+            if (!@mkdir($path, 0755, true) && !is_dir($path)) {
+                throw new \Exception("Cannot create directory: {$path}");
+            }
+        }
     }
 }
