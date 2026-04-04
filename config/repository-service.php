@@ -1,42 +1,23 @@
 <?php
 
 return [
+
     /*
     |--------------------------------------------------------------------------
-    | Repository Namespace
+    | Paths for Generated Files
+    |--------------------------------------------------------------------------
+    |
+    | These paths will be used when generating repositories and services.
+    |
+    */
+    'repository_path' => app_path('Repositories'),
+    'service_path' => app_path('Services'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Namespace
     |--------------------------------------------------------------------------
     */
     'repository_namespace' => 'App\\Repositories',
-    
-    /*
-    |--------------------------------------------------------------------------
-    | Service Namespace
-    |--------------------------------------------------------------------------
-    */
     'service_namespace' => 'App\\Services',
-    
-    /*
-    |--------------------------------------------------------------------------
-    | Contract Namespace
-    |--------------------------------------------------------------------------
-    */
-    'contract_namespace' => 'App\\Contracts',
-    
-    /*
-    |--------------------------------------------------------------------------
-    | Default Paths
-    |--------------------------------------------------------------------------
-    */
-    'paths' => [
-        'repositories' => app_path('Repositories'),
-        'services' => app_path('Services'),
-        'contracts' => app_path('Contracts'),
-    ],
-
-        /*
-    |--------------------------------------------------------------------------
-    | Repository Base Class
-    |--------------------------------------------------------------------------
-    */
-    'repository_base_class' => 'Mitul456\\LaravelRepositoryService\\Traits\\BaseRepositoryTrait',
 ];

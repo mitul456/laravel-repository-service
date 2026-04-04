@@ -1,0 +1,40 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ repository_contract_namespace }}\{{ repository_interface }};
+
+class {{ class }}
+{
+    protected {{ repository_interface }} $repository;
+
+    public function __construct({{ repository_interface }} $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    public function getAll($model)
+    {
+        return $this->repository->all($model);
+    }
+
+    public function find($model, $id)
+    {
+        return $this->repository->find($model, $id);
+    }
+
+    public function create($model, array $data)
+    {
+        return $this->repository->create($model, $data);
+    }
+
+    public function update($model, $id, array $data)
+    {
+        return $this->repository->update($model, $id, $data);
+    }
+
+    public function delete($model, $id)
+    {
+        return $this->repository->delete($model, $id);
+    }
+}

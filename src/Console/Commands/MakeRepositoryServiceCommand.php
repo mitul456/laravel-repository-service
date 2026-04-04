@@ -3,32 +3,21 @@
 namespace Mitul456\LaravelRepositoryService\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
+use Mitul456\LaravelRepositoryService\Generators\RepositoryGenerator;
+use Mitul456\LaravelRepositoryService\Generators\ServiceGenerator;
 
 class MakeRepositoryServiceCommand extends Command
 {
-    protected $signature = 'make:repo-service {name} {--model=}';
-    protected $description = 'Create repository and service together';
+    protected $signature = 'make:repository-service {name}';
+    protected $description = 'Generate both repository and service classes';
 
     public function handle()
     {
         $name = $this->argument('name');
-        $model = $this->option('model') ?? $name;
-        
-        $this->call('make:repository', [
-            'name' => $name,
-            '--model' => $model
-        ]);
-        
-        $this->call('make:service', [
-            'name' => "{$name}",
-            '--repository' => $name
-        ]);
-        
-        $this->info("🎉 Repository and Service created successfully!");
-        $this->info("Don't forget to:");
-        $this->info("1. Register repository binding in a service provider");
-        $this->info("2. Create your model: php artisan make:model {$model}");
+
+        (new RepositoryGenerator($name))->generate();
+        (new ServiceGenerator($name))->generate();
+
+        $this->info("Repository and Service for {$name} created successfully.");
     }
 }

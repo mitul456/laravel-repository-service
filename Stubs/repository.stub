@@ -1,0 +1,17 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ namespace }}\Contracts\{{ interface }};
+use Mitul456\LaravelRepositoryService\Traits\BaseRepository;
+use Illuminate\Database\Eloquent\Model;
+
+class {{ class }} implements {{ interface }}
+{
+    use BaseRepository;
+
+    public function __construct()
+    {
+        // Inject models if needed
+    }
+}

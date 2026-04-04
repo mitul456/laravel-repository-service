@@ -3,30 +3,38 @@
 namespace Mitul456\LaravelRepositoryService;
 
 use Illuminate\Support\ServiceProvider;
-use YourVendor\LaravelRepositoryService\Console\Commands\MakeRepositoryCommand;
-use YourVendor\LaravelRepositoryService\Console\Commands\MakeServiceCommand;
-use YourVendor\LaravelRepositoryService\Console\Commands\MakeRepositoryServiceCommand;
+use Illuminate\Support\Str;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function register(): void
     {
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                MakeRepositoryCommand::class,
-                MakeServiceCommand::class,
-                MakeRepositoryServiceCommand::class,
-            ]);
-        }
+        $repositoryNamespace = config('repository-service.repository_namespace');
+        $repositoryPath = app_path('Repositories'); // default path
 
-        // Config publish
-        $this->publishes([
-            __DIR__ . '/../config/repository-service.php' => config_path('repository-service.php'),
-        ], 'repository-service-config');
+        // Scan Contracts folder
+        $contractsPath = $repositoryPath . '/Contracts';
+
+        if (is_dir($contractsPath)) {
+            $files = scandir($contractsPath);
+
+            foreach ($files as $file) {
+                if (Str::endsWith($file, 'RepositoryInterface.php')) {
+                    $interfaceName = pathinfo($file, PATHINFO_FILENAME);
+                    $className = str_replace('Interface', '', $interfaceName);
+
+                    $interfaceFQN = $repositoryNamespace . '\\Contracts\\' . $interfaceName;
+                    $classFQN = $repositoryNamespace . '\\' . $className;
+
+                    // Bind interface to class
+                    $this->app->bind($interfaceFQN, $classFQN);
+                }
+            }
+        }
     }
 
-    public function register()
+    public function boot(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/repository-service.php', 'repository-service');
+        //
     }
 }

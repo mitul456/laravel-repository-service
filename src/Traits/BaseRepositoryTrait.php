@@ -2,47 +2,40 @@
 
 namespace Mitul456\LaravelRepositoryService\Traits;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Collection;
+use Mitul456\LaravelRepositoryService\Contracts\RepositoryInterface;
 
 trait BaseRepositoryTrait
 {
-    protected Model $model;
-
-    public function all(array $columns = ['*']): Collection
+    public function all($model)
     {
-        return $this->model->get($columns);
+        return $model->all();
     }
 
-    public function find($id): ?Model
+    public function find($model, $id)
     {
-        return $this->model->find($id);
+        return $model->find($id);
     }
 
-    public function findOrFail($id): Model
+    public function create($model, array $data)
     {
-        return $this->model->findOrFail($id);
+        return $model->create($data);
     }
 
-    public function create(array $data): Model
+    public function update($model, $id, array $data)
     {
-        return $this->model->create($data);
+        $record = $model->find($id);
+        if ($record) {
+            $record->update($data);
+        }
+        return $record;
     }
 
-    public function update($id, array $data): Model
+    public function delete($model, $id)
     {
-        $record = $this->findOrFail($id);
-        $record->update($data);
-        return $record->fresh();
-    }
-
-    public function delete($id): bool
-    {
-        return $this->findOrFail($id)->delete();
-    }
-
-    public function paginate($perPage = 15)
-    {
-        return $this->model->paginate($perPage);
+        $record = $model->find($id);
+        if ($record) {
+            $record->delete();
+        }
+        return $record;
     }
 }

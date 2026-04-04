@@ -1,8 +1,15 @@
 {
     "name": "mitul456/laravel-repository-service",
-    "description": "Repository Pattern and Service Layer Generator for Laravel",
+    "description": "A Laravel package to generate repository and service layers using artisan commands",
     "type": "library",
     "license": "MIT",
+    "keywords": [
+        "laravel",
+        "repository pattern",
+        "service layer",
+        "clean architecture",
+        "php"
+    ],
     "authors": [
         {
             "name": "Md Parvez Mosharrof Mitul",
@@ -11,7 +18,8 @@
     ],
     "require": {
         "php": "^8.0",
-        "illuminate/support": "^10.0|^11.0"
+        "illuminate/support": "^10.0|^11.0",
+        "illuminate/console": "^10.0|^11.0"
     },
     "autoload": {
         "psr-4": {
@@ -24,7 +32,5 @@
                 "Mitul456\\LaravelRepositoryService\\RepositoryServiceProvider"
             ]
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }

@@ -1,0 +1,12 @@
+<?php
+
+namespace {{ namespace }};
+
+interface {{ class }}
+{
+    public function all(\Illuminate\Database\Eloquent\Model $model);
+    public function find(\Illuminate\Database\Eloquent\Model $model, $id);
+    public function create(\Illuminate\Database\Eloquent\Model $model, array $data);
+    public function update(\Illuminate\Database\Eloquent\Model $model, $id, array $data);
+    public function delete(\Illuminate\Database\Eloquent\Model $model, $id);
+}
