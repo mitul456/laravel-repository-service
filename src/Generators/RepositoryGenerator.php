@@ -40,7 +40,7 @@ class RepositoryGenerator
             throw new \Exception("Stub file not found: {$stubPath}");
         }
 
-        $stub = file_get_contents($stubPath);
+        $stub = file_get_contents(__DIR__ . '/../stubs/repository.stub');
         $stub = str_replace('{{ namespace }}', $repositoryNamespace, $stub);
         $stub = str_replace('{{ class }}', $className, $stub);
         $stub = str_replace('{{ interface }}', $interfaceName, $stub);

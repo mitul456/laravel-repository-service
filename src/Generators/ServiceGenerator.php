@@ -33,7 +33,7 @@ class ServiceGenerator
             throw new \Exception("Stub file not found: {$stubPath}");
         }
 
-        $stub = file_get_contents($stubPath);
+        $stub = file_get_contents(__DIR__ . '/../stubs/service.stub');
         $stub = str_replace('{{ namespace }}', $serviceNamespace, $stub);
         $stub = str_replace('{{ class }}', $className, $stub);
         $stub = str_replace('{{ repository_class }}', $repositoryClass, $stub);

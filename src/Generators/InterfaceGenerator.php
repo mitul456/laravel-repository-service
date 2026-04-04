@@ -26,7 +26,7 @@ class InterfaceGenerator
         $interfaceName = $this->name . 'RepositoryInterface';
         $filePath = $path . DIRECTORY_SEPARATOR . $interfaceName . '.php';
 
-        $stubPath = base_path('stubs/interface.stub');
+        $stubPath = __DIR__ . '/../stubs/interface.stub';
         if (!file_exists($stubPath)) {
             throw new \Exception("Stub file not found: {$stubPath}");
         }
