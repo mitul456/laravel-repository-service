@@ -4,15 +4,15 @@ namespace Mitul456\LaravelRepositoryService;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Mitul456\LaravelRepositoryService\Console\Commands\MakeRepositoryServiceCommand;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
         $repositoryNamespace = config('repository-service.repository_namespace');
-        $repositoryPath = app_path('Repositories'); // default path
+        $repositoryPath = app_path('Repositories');
 
-        // Scan Contracts folder
         $contractsPath = $repositoryPath . '/Contracts';
 
         if (is_dir($contractsPath)) {
@@ -26,7 +26,6 @@ class RepositoryServiceProvider extends ServiceProvider
                     $interfaceFQN = $repositoryNamespace . '\\Contracts\\' . $interfaceName;
                     $classFQN = $repositoryNamespace . '\\' . $className;
 
-                    // Bind interface to class
                     $this->app->bind($interfaceFQN, $classFQN);
                 }
             }
@@ -35,6 +34,10 @@ class RepositoryServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        //
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                MakeRepositoryServiceCommand::class,
+            ]);
+        }
     }
 }
