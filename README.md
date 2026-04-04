@@ -89,22 +89,6 @@ php artisan make:repository-service User
 
 ---
 
-### 2. Create Only Repository
-
-```bash
-php artisan make:repository UserRepository
-```
-
----
-
-### 3. Create Only Service
-
-```bash
-php artisan make:service UserService
-```
-
----
-
 ## 📌 Example Usage
 
 ### Repository Example

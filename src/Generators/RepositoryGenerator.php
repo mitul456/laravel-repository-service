@@ -34,13 +34,13 @@ class RepositoryGenerator
         $interfaceName = $this->name . 'RepositoryInterface';
 
         $repositoryFilePath = $repositoryPath . DIRECTORY_SEPARATOR . $className . '.php';
-        $stubPath = base_path('stubs/repository.stub');
+        $stubPath = __DIR__ . '/../stubs/repository.stub';
 
         if (!file_exists($stubPath)) {
             throw new \Exception("Stub file not found: {$stubPath}");
         }
 
-        $stub = file_get_contents(__DIR__ . '/../stubs/repository.stub');
+        $stub = file_get_contents($stubPath);
         $stub = str_replace('{{ namespace }}', $repositoryNamespace, $stub);
         $stub = str_replace('{{ class }}', $className, $stub);
         $stub = str_replace('{{ interface }}', $interfaceName, $stub);
